@@ -1,0 +1,34 @@
+version: '2.2'
+
+services:
+
+  site:
+    environment: 
+      - DATABASE_CONNECTION_STRING=Host=172.20.20.20;Port=5432;Pooling=true;Database=vwat;User Id=vwat;Password=123
+      - ASPNETCORE_ENVIRONMENT=Development
+    hostname: site
+    image: sitesecdevopslab:1.0
+    networks:
+      netlab:
+        ipv4_address: 172.20.20.10
+
+  database:
+    hostname: databasesecdevopslab
+    image: databasesecdevopslab:1.0
+    networks:
+      netlab:
+        ipv4_address: 172.20.20.20
+
+  jenkins:
+    hostname: jenkinssecdevopslab
+    image: jenkinssecdevopslab:1.0
+    networks:
+      netlab:
+        ipv4_address: 172.20.20.30
+
+networks:
+  netlab:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.20.0/24
