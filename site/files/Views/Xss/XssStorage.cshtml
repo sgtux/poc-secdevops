@@ -1,0 +1,16 @@
+<h2 class="page-title">Cross-site Scripting (Storage)</h2>
+<form asp-action="SaveStorage" style="margin-top:20px">
+  <input name="comment" />
+  <button class="btn">save comment</button>
+  <br />
+  <br />
+</form>
+<div class="comment-box">
+  @foreach (var comment in ViewBag.Comments)
+  {
+    <div class="comment-line">
+      <span>@Html.Raw($"{comment.Id} - {comment.Description}")</span>
+      <a asp-action="Delete" asp-route-id="@comment.Id" class="btn warn">REMOVE</a>
+    </div>
+  }
+</div>
