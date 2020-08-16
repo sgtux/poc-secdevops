@@ -9,6 +9,8 @@ RUN apt install -y postgresql-12 && \
   service postgresql start && \
   runuser -l postgres -c "psql -f /var/lib/postgresql/pre-script.sql" && \
   cp /root/script.sql /home/vwat && \
-  runuser -l vwat -c "psql -f /home/vwat/script.sql"
+  runuser -l vwat -c "psql -f /home/vwat/script.sql" && \
+  apt autoremove -y && \
+  apt clean
 RUN chmod +x /root/init.sh
 CMD [ "/root/init.sh" ]
