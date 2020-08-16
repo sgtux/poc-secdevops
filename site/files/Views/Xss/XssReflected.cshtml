@@ -1,0 +1,22 @@
+@model System.Collections.Generic.IEnumerable<VWAT.Models.CommentModel>
+
+<h2 class="page-title">Cross-site Scripting (Reflected)</h2>
+<form asp-controller="Xss" asp-action="FilterComments">
+    <input class="form-input" name="search" />
+    <button class="btn">search</button>
+    <br />
+    <br />
+    <h4>Results for "@Html.Raw(@ViewBag.Filter)"</h4>
+    <br />
+</form>
+@if(Model.Any())
+{
+    <div class="comment-box">
+    @foreach (var c in Model)
+    {
+        <div class="comment-line">
+        <span>@c.Id - @c.Description</span>
+        </div>
+    }
+    </div>
+}
